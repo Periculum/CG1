@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = QTTarget1.0.0
-DISTDIR = /home/stud/5MZ-MNL/Arbeitsfläche/UebungSS2018/.tmp/QTTarget1.0.0
+DISTDIR = /home/stud/LKK-DSD/CG1/CG1/.tmp/QTTarget1.0.0
 LINK          = g++
 LFLAGS        = -m64 -Wl,-O1
 LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lQt5OpenGL -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -62,7 +62,8 @@ SOURCES       = main.cpp \
 		CgEvents/CgWindowResizeEvent.cpp \
 		CgSceneGraph/CgTriangle.cpp \
 		CgSceneGraph/CgPolyline.cpp \
-		CgEvents/CgColorChangedEvent.cpp moc_CgQtGLRenderWidget.cpp \
+		CgEvents/CgColorChangedEvent.cpp \
+		CgSceneGraph/CgCylinder.cpp moc_CgQtGLRenderWidget.cpp \
 		moc_CgQtGui.cpp \
 		moc_CgQtMainApplication.cpp
 OBJECTS       = main.o \
@@ -80,6 +81,7 @@ OBJECTS       = main.o \
 		CgTriangle.o \
 		CgPolyline.o \
 		CgColorChangedEvent.o \
+		CgCylinder.o \
 		moc_CgQtGLRenderWidget.o \
 		moc_CgQtGui.o \
 		moc_CgQtMainApplication.o
@@ -163,7 +165,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CgEvents/CgWindowResizeEvent.h \
 		CgSceneGraph/CgTriangle.h \
 		CgSceneGraph/CgPolyline.h \
-		CgEvents/CgColorChangedEvent.h main.cpp \
+		CgEvents/CgColorChangedEvent.h \
+		CgSceneGraph/CgCylinder.h main.cpp \
 		CgQtViewer/CGQtGLRenderWidget.cpp \
 		CgQtViewer/CgQtGui.cpp \
 		CgBase/CgObservable.cpp \
@@ -177,7 +180,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CgEvents/CgWindowResizeEvent.cpp \
 		CgSceneGraph/CgTriangle.cpp \
 		CgSceneGraph/CgPolyline.cpp \
-		CgEvents/CgColorChangedEvent.cpp
+		CgEvents/CgColorChangedEvent.cpp \
+		CgSceneGraph/CgCylinder.cpp
 QMAKE_TARGET  = QTTarget
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = QTTarget
@@ -345,8 +349,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents CgBase/CgBaseRenderWindow.h CgQtViewer/CgQtGLRenderWidget.h CgQtViewer/CgQtGui.h CgBase/CgObserver.h CgBase/CgObservable.h CgBase/CgBaseEvent.h CgBase/CgEnums.h CgEvents/CgMouseEvent.h CgQtViewer/CgQtMainApplication.h CgSceneGraph/CgSceneControl.h CgEvents/CgKeyEvent.h CgBase/CgBaseRenderer.h CgBase/CgBaseRenderableObject.h CgSceneGraph/CgExampleTriangle.h CgBase/CgBasePointCloud.h CgBase/CgBaseTriangleMesh.h CgBase/CgBasePolygonMesh.h CgBase/CgBasePolyline.h CgBase/CgBaseSceneControl.h CgQtViewer/CgQtGlBufferObject.h CgQtViewer/CgTrackball.h CgEvents/CgWindowResizeEvent.h CgSceneGraph/CgTriangle.h CgSceneGraph/CgPolyline.h CgEvents/CgColorChangedEvent.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp CgQtViewer/CGQtGLRenderWidget.cpp CgQtViewer/CgQtGui.cpp CgBase/CgObservable.cpp CgEvents/CgMouseEvent.cpp CgQtViewer/CgQtMainApplication.cpp CgSceneGraph/CgSceneControl.cpp CgEvents/CgKeyEvent.cpp CgSceneGraph/CgExampleTriangle.cpp CgQtViewer/CgQtGlBufferObject.cpp CgQtViewer/CgTrackball.cpp CgEvents/CgWindowResizeEvent.cpp CgSceneGraph/CgTriangle.cpp CgSceneGraph/CgPolyline.cpp CgEvents/CgColorChangedEvent.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents CgBase/CgBaseRenderWindow.h CgQtViewer/CgQtGLRenderWidget.h CgQtViewer/CgQtGui.h CgBase/CgObserver.h CgBase/CgObservable.h CgBase/CgBaseEvent.h CgBase/CgEnums.h CgEvents/CgMouseEvent.h CgQtViewer/CgQtMainApplication.h CgSceneGraph/CgSceneControl.h CgEvents/CgKeyEvent.h CgBase/CgBaseRenderer.h CgBase/CgBaseRenderableObject.h CgSceneGraph/CgExampleTriangle.h CgBase/CgBasePointCloud.h CgBase/CgBaseTriangleMesh.h CgBase/CgBasePolygonMesh.h CgBase/CgBasePolyline.h CgBase/CgBaseSceneControl.h CgQtViewer/CgQtGlBufferObject.h CgQtViewer/CgTrackball.h CgEvents/CgWindowResizeEvent.h CgSceneGraph/CgTriangle.h CgSceneGraph/CgPolyline.h CgEvents/CgColorChangedEvent.h CgSceneGraph/CgCylinder.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp CgQtViewer/CGQtGLRenderWidget.cpp CgQtViewer/CgQtGui.cpp CgBase/CgObservable.cpp CgEvents/CgMouseEvent.cpp CgQtViewer/CgQtMainApplication.cpp CgSceneGraph/CgSceneControl.cpp CgEvents/CgKeyEvent.cpp CgSceneGraph/CgExampleTriangle.cpp CgQtViewer/CgQtGlBufferObject.cpp CgQtViewer/CgTrackball.cpp CgEvents/CgWindowResizeEvent.cpp CgSceneGraph/CgTriangle.cpp CgSceneGraph/CgPolyline.cpp CgEvents/CgColorChangedEvent.cpp CgSceneGraph/CgCylinder.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -374,14 +378,14 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_CgQtGLRenderWidget.cpp moc_CgQtGui.cpp moc_CgQtMainApplication.cpp
 moc_CgQtGLRenderWidget.cpp: CgBase/CgBaseRenderer.h \
 		CgQtViewer/CgQtGLRenderWidget.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/stud/5MZ-MNL/Arbeitsfläche/UebungSS2018 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGLRenderWidget.h -o moc_CgQtGLRenderWidget.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/stud/LKK-DSD/CG1/CG1 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGLRenderWidget.h -o moc_CgQtGLRenderWidget.cpp
 
 moc_CgQtGui.cpp: CgBase/CgObservable.h \
 		CgQtViewer/CgQtGui.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/stud/5MZ-MNL/Arbeitsfläche/UebungSS2018 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGui.h -o moc_CgQtGui.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/stud/LKK-DSD/CG1/CG1 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGui.h -o moc_CgQtGui.cpp
 
 moc_CgQtMainApplication.cpp: CgQtViewer/CgQtMainApplication.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/stud/5MZ-MNL/Arbeitsfläche/UebungSS2018 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtMainApplication.h -o moc_CgQtMainApplication.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/stud/LKK-DSD/CG1/CG1 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtMainApplication.h -o moc_CgQtMainApplication.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -512,6 +516,12 @@ CgColorChangedEvent.o: CgEvents/CgColorChangedEvent.cpp CgEvents/CgColorChangedE
 		CgBase/CgBaseEvent.h \
 		CgBase/CgEnums.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgColorChangedEvent.o CgEvents/CgColorChangedEvent.cpp
+
+CgCylinder.o: CgSceneGraph/CgCylinder.cpp CgSceneGraph/CgCylinder.h \
+		CgBase/CgBaseTriangleMesh.h \
+		CgBase/CgBaseRenderableObject.h \
+		CgBase/CgEnums.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgCylinder.o CgSceneGraph/CgCylinder.cpp
 
 moc_CgQtGLRenderWidget.o: moc_CgQtGLRenderWidget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_CgQtGLRenderWidget.o moc_CgQtGLRenderWidget.cpp

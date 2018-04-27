@@ -15,7 +15,19 @@ CgSceneControl::CgSceneControl()
      //m_triangle=new CgExampleTriangle(21,true);
      m_triangle = new CgTriangle(21);
 
-     m_polyline = new CgPolyline(14568, glm::vec3(0,0,0), glm::vec3(0,1,0), glm::vec3(1,0,0), 10);
+     m_polyline1= new CgPolyline(14568, m_triangle->getFaceNormals().at(0), m_triangle->getFaceNormals().at(0)+ m_triangle->getVertexNormals().at(0), glm::vec3(1,0,0), 5);
+     m_polyline2= new CgPolyline(14569, m_triangle->getFaceNormals().at(1), m_triangle->getFaceNormals().at(1)+ m_triangle->getVertexNormals().at(1), glm::vec3(1,0,0), 5);
+     m_polyline3= new CgPolyline(14570, m_triangle->getFaceNormals().at(2), m_triangle->getFaceNormals().at(2)+ m_triangle->getVertexNormals().at(2), glm::vec3(1,0,0), 5);
+     m_polyline4= new CgPolyline(14571, m_triangle->getFaceNormals().at(3), m_triangle->getFaceNormals().at(3)+ m_triangle->getVertexNormals().at(3), glm::vec3(1,0,0), 5);
+     m_polyline5= new CgPolyline(14572, m_triangle->getFaceNormals().at(4), m_triangle->getFaceNormals().at(4)+ m_triangle->getVertexNormals().at(4), glm::vec3(1,0,0), 5);
+     m_polyline6= new CgPolyline(14573, m_triangle->getFaceNormals().at(5), m_triangle->getFaceNormals().at(5)+ m_triangle->getVertexNormals().at(5), glm::vec3(1,0,0), 5);
+     m_polyline7= new CgPolyline(14574, m_triangle->getFaceNormals().at(6), m_triangle->getFaceNormals().at(6)+ m_triangle->getVertexNormals().at(6), glm::vec3(1,0,0), 5);
+     m_polyline8= new CgPolyline(14575, m_triangle->getFaceNormals().at(7), m_triangle->getFaceNormals().at(7)+ m_triangle->getVertexNormals().at(7), glm::vec3(1,0,0), 5);
+     m_polyline9= new CgPolyline(14576, m_triangle->getFaceNormals().at(8), m_triangle->getFaceNormals().at(8)+ m_triangle->getVertexNormals().at(8), glm::vec3(1,0,0), 5);
+     m_polyline10= new CgPolyline(14577, m_triangle->getFaceNormals().at(9), m_triangle->getFaceNormals().at(9)+ m_triangle->getVertexNormals().at(9), glm::vec3(1,0,0), 5);
+     m_polyline11= new CgPolyline(14578, m_triangle->getFaceNormals().at(10), m_triangle->getFaceNormals().at(10)+ m_triangle->getVertexNormals().at(10), glm::vec3(1,0,0), 5);
+     m_polyline12= new CgPolyline(14579, m_triangle->getFaceNormals().at(11), m_triangle->getFaceNormals().at(11)+ m_triangle->getVertexNormals().at(11), glm::vec3(1,0,0), 5);
+
 
      m_current_transformation=glm::mat4(1.);
      m_proj_matrix= glm::mat4x4(glm::vec4(1.792591, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.792591, 0.0, 0.0), glm::vec4(0.0, 0.0, -1.0002, -1.0), glm::vec4(0.0, 0.0, -0.020002, 0.0));
@@ -26,7 +38,18 @@ CgSceneControl::CgSceneControl()
 CgSceneControl::~CgSceneControl()
 {
      delete m_triangle;
-    delete m_polyline;
+    delete m_polyline1;
+    delete m_polyline2;
+    delete m_polyline3;
+    delete m_polyline4;
+    delete m_polyline5;
+    delete m_polyline6;
+    delete m_polyline7;
+    delete m_polyline8;
+    delete m_polyline9;
+    delete m_polyline10;
+    delete m_polyline11;
+    delete m_polyline12;
 }
 
 void CgSceneControl::setRenderer(CgBaseRenderer* r)
@@ -34,8 +57,19 @@ void CgSceneControl::setRenderer(CgBaseRenderer* r)
     m_renderer=r;
     m_renderer->setSceneControl(this);
 
-    m_renderer->init(m_triangle);
-    m_renderer->init(m_polyline);
+    //m_renderer->init(m_triangle);
+    m_renderer->init(m_polyline1);
+    m_renderer->init(m_polyline2);
+    m_renderer->init(m_polyline3);
+    m_renderer->init(m_polyline4);
+    m_renderer->init(m_polyline5);
+    m_renderer->init(m_polyline6);
+    m_renderer->init(m_polyline7);
+    m_renderer->init(m_polyline8);
+    m_renderer->init(m_polyline9);
+    m_renderer->init(m_polyline10);
+    m_renderer->init(m_polyline11);
+    m_renderer->init(m_polyline12);
 }
 
 
@@ -44,8 +78,19 @@ void CgSceneControl::renderObjects()
     m_renderer->setProjectionMatrix(m_proj_matrix);
     m_renderer->setLookAtMatrix(glm::mat4x4(glm::vec4(1.0, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.0, 0.0, 0.0), glm::vec4(0.0, 0.0, 1.0, -1.0), glm::vec4(0.0, 0.0, -1.0, 1.0)));
 
-    m_renderer->render(m_triangle,m_current_transformation);
-    m_renderer->render(m_polyline,m_current_transformation);
+    //m_renderer->render(m_triangle,m_current_transformation);
+    m_renderer->render(m_polyline1,m_current_transformation);
+    m_renderer->render(m_polyline2,m_current_transformation);
+    m_renderer->render(m_polyline3,m_current_transformation);
+    m_renderer->render(m_polyline4,m_current_transformation);
+    m_renderer->render(m_polyline5,m_current_transformation);
+    m_renderer->render(m_polyline6,m_current_transformation);
+    m_renderer->render(m_polyline7,m_current_transformation);
+    m_renderer->render(m_polyline8,m_current_transformation);
+    m_renderer->render(m_polyline9,m_current_transformation);
+    m_renderer->render(m_polyline10,m_current_transformation);
+    m_renderer->render(m_polyline11,m_current_transformation);
+    m_renderer->render(m_polyline12,m_current_transformation);
 
 }
 
@@ -88,7 +133,18 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
     {
         CgColorChangedEvent* ev = (CgColorChangedEvent*)e;
         std::cout << *ev <<std::endl;
-        m_polyline->setColor(ev->getColor());
+        m_polyline1->setColor(ev->getColor());
+        m_polyline2->setColor(ev->getColor());
+        m_polyline3->setColor(ev->getColor());
+        m_polyline4->setColor(ev->getColor());
+        m_polyline5->setColor(ev->getColor());
+        m_polyline6->setColor(ev->getColor());
+        m_polyline7->setColor(ev->getColor());
+        m_polyline8->setColor(ev->getColor());
+        m_polyline9->setColor(ev->getColor());
+        m_polyline10->setColor(ev->getColor());
+        m_polyline11->setColor(ev->getColor());
+        m_polyline12->setColor(ev->getColor());
         m_renderer->redraw();
 
     }

@@ -3,6 +3,7 @@
 
 #include "CgBase/CgBasePolyline.h"
 
+
 class CgPolyline:public CgBasePolyline
 {
 public:

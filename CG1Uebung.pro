@@ -18,7 +18,9 @@ SOURCES += main.cpp \
     CgEvents/CgWindowResizeEvent.cpp \
     CgSceneGraph/CgTriangle.cpp \
     CgSceneGraph/CgPolyline.cpp \
-    CgEvents/CgColorChangedEvent.cpp
+    CgEvents/CgColorChangedEvent.cpp \
+    CgSceneGraph/CgCylinder.cpp \
+    CgSceneGraph/CgClylinder2.cpp
 
 HEADERS += \
     CgBase/CgBaseRenderWindow.h \
@@ -45,5 +47,7 @@ HEADERS += \
     CgEvents/CgWindowResizeEvent.h \
     CgSceneGraph/CgTriangle.h \
     CgSceneGraph/CgPolyline.h \
-    CgEvents/CgColorChangedEvent.h
+    CgEvents/CgColorChangedEvent.h \
+    CgSceneGraph/CgCylinder.h \
+    CgSceneGraph/CgClylinder2.h
 
